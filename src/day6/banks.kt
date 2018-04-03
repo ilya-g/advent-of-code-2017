@@ -26,7 +26,7 @@ fun redistribute(banks: List<Int>): List<Int> {
     val value = result.max()!!
     var index = result.indexOf(value)
     result[index] = 0
-    (value downTo 1).forEach {
+    repeat(times = value) {
         index = (index + 1) % result.size
         result[index] += 1
     }
