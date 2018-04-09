@@ -23,11 +23,15 @@ fun round1(input: String) {
     println(elements.let { (a, b) -> a * b })
 }
 
-fun round2(input: String) {
+fun round2Hash(input: String): List<Int> {
     val lengths = input.map { it.toInt() } + listOf(17, 31, 73, 47, 23)
     val elements = twistKnots(lengths, rounds = 64)
     val dense = elements.chunked(16) { it.reduce { acc, e -> acc xor e } }
-    println(dense.joinToString("") { it.toString(16).padStart(2, '0') })
+    return dense
+}
+
+fun round2(input: String) {
+    println(round2Hash(input).joinToString("") { it.toString(16).padStart(2, '0') })
 }
 
 fun twistKnots(lengths: List<Int>, elements: Int = 256, rounds: Int = 1): List<Int> {
